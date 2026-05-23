@@ -85,4 +85,3 @@ This will print a summary of metrics and output the detailed evaluation results 
 - **Sliding Window Memory**: Avoids context blow-up and excessive token costs by capping context to the last $N$ turns (adjustable via UI). The memory is formatted dynamically to match the specific model API schemas (e.g. converting `assistant` roles to `model` for Gemini).
 - **Dual-Layer Guardrails**: Combines lightweight, ultra-fast regex guardrails directly at the application boundary for common risk factors, with standard system prompt constraints for nuanced safe generation.
 - **Provider-Agnostic LLM Interface**: A single class `LLMClient` wraps all providers (Gemini and Hugging Face). This decouples application logic from specific vendor SDK quirks.
-- **Modern UI Aesthetic**: Built with a dark mode glassmorphic UI using customized CSS, tailored color palettes, Outfit typography, and dynamic metric badges (latency & tokens) for a premium look and feel.
