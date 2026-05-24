@@ -1,4 +1,4 @@
-# 🌌 LLM Benchmarking Suite: AI Personal Assistant Benchmarking
+#  LLM Benchmarking Suite: AI Personal Assistant Benchmarking
 
 A unified framework to run, compare, and benchmark Open Source (OSS) models (e.g. Qwen 2.5 via Hugging Face Serverless Inference) against Frontier models (e.g. Google Gemini). 
 
@@ -10,7 +10,7 @@ This project features:
 
 ---
 
-## 📁 Repository Structure
+##  Repository Structure
 
 ```
 ├── app/
@@ -30,7 +30,7 @@ This project features:
 
 ---
 
-## ⚡ Setup & Local Execution
+##  Setup & Local Execution
 
 ### 1. Clone the repository and navigate to the project directory
 ```bash
