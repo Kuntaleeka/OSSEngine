@@ -137,7 +137,6 @@ class LLMClient:
             )
         )
 
-        # Send the latest prompt with exponential backoff on rate limits
         max_retries = 5
         backoff_factor = 2.0
         initial_delay = 5.0

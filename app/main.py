@@ -36,8 +36,7 @@ except Exception as e:
         }
     }
 
-# ----------------- CUSTOM STYLE & INJECTIONS -----------------
-# Premium Glassmorphism & Dark Aesthetics
+# Some AI help for CSS styling to create a sleek, modern UI with a dark theme and glassmorphism elements
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
@@ -165,7 +164,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ----------------- INITIALIZE SESSION STATE -----------------
+
 if "memory" not in st.session_state:
     # Initialize conversational memory
     st.session_state.memory = ConversationMemory(
@@ -184,7 +183,6 @@ if "chat_history" not in st.session_state:
 if "performance_log" not in st.session_state:
     st.session_state.performance_log = []
 
-# ----------------- SIDEBAR CONTROLS -----------------
 st.sidebar.markdown("<div style='text-align: center; margin-bottom: 1.5rem;'><h2 style='color:#a855f7; font-weight:700; margin-bottom:0;'>⚙️ Settings</h2><span style='color:#64748b;'>Configure Assistants</span></div>", unsafe_allow_html=True)
 
 # Assistant provider switching
@@ -243,7 +241,7 @@ st.session_state.memory.system_prompt = custom_sys_prompt
 st.markdown("<h1 class='glowing-header'>🌌 LLM Benchmarking Suite</h1>", unsafe_allow_html=True)
 st.markdown("<div class='sub-header'>A unified interface for benchmarking Open Source and Frontier Assistant Models</div>", unsafe_allow_html=True)
 
-# Layout: 2 Columns - Chat on the left (70%), Observability / Memory Inspector on the right (30%)
+
 col_chat, col_obs = st.columns([7, 3])
 
 with col_chat:
@@ -271,7 +269,7 @@ with col_chat:
                     f'</div>'
                 )
                 
-                # Wrap everything in the chat bubble container with blank lines around content for rich markdown parsing
+
                 html_content = (
                     f'<div class="chat-bubble {bubble_class}">'
                     f'{header_html}'
@@ -290,14 +288,14 @@ with col_chat:
     # Chat Input
     prompt = st.chat_input("Ask the assistant something...")
     if prompt:
-        # Display user message instantly
+
         st.session_state.chat_history.append({
             "role": "user",
             "content": prompt,
             "refused": False
         })
         
-        # Check guardrails if enabled
+
         triggered_rule = None
         refusal_msg = ""
         if enable_guardrails:
@@ -312,7 +310,7 @@ with col_chat:
                     break
         
         if triggered_rule:
-            # Response refused locally
+
             st.session_state.chat_history.append({
                 "role": "assistant",
                 "content": refusal_msg,
@@ -332,7 +330,7 @@ with col_chat:
                     "error": "Refused locally by guardrail rule: " + triggered_rule
                 }
             })
-            # Log performance metadata (refusal)
+
             st.session_state.performance_log.append({
                 "model_class": provider_type,
                 "provider": "local_guardrail",
@@ -343,17 +341,16 @@ with col_chat:
             })
             st.rerun()
         else:
-            # Add user message to conversation memory
             st.session_state.memory.add_message("user", prompt)
             
-            # Fetch formatted messages for LLM Client
+            # Fetch formatted messages 
             history_openai = st.session_state.memory.get_messages_openai()
             history_gemini = st.session_state.memory.get_messages_gemini()
             
             # Fetch settings
             params = config.get("generation_params", {"temperature": 0.7, "max_tokens": 1024, "top_p": 0.9})
             
-            # Show a beautiful spinner with a glowing loader message
+           
             with st.spinner(f"Querying {provider_type} ({model_input})..."):
                 # Call client
                 response = st.session_state.client.get_response(
